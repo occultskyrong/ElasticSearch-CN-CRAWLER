@@ -1,0 +1,30 @@
+
+# IDE
+.vscode
+
+# mac
+.DS_Store
+
+# svn
+.svn
+
+# .bak
+*.bak
+
+# node | npm | yarn
+node_modules
+code/node_modules/
+code/npm-debug.log
+code/npm-lock.log
+code/yarn.lock
+
+# logs
+*.log
+
+# static file
+public/
+.deploy*/
+
+# temp file
+Thumbs.db
+db.json
