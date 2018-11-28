@@ -19,13 +19,15 @@ async function readListPage(module, page) {
 }
 
 /**
- * 请求 - 
+ * 请求 - 文档详情页
  * @param {string} href 请求地址
  */
-async function readDetail(href){
-
+async function readDetailPage(href) {
+  const response = await request(href);
+  return response;
 }
 
 module.exports = {
+  readDetailPage,
   readListPage,
 };

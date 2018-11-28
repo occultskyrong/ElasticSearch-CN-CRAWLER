@@ -6,11 +6,25 @@
 // # TODO: 分析数据、产出可视化
 
 
-const { readListPage } = require('./request');
-const { analysisQuestionPage } = require('./cheerio');
+const { readListPage, readDetailPage } = require('./request');
+const { analysisQuestionPage, analysisQuestionDetail } = require('./cheerio');
 
-readListPage('question', 1)
-  .then(analysisQuestionPage)
+async function readDetail(question) {
+  const { href } = question;
+  const questionHtml = await readDetailPage(href);
+  const questionDetail = await analysisQuestionDetail(questionHtml, question);
+  return questionDetail;
+}
+
+async function readPage() {
+  const questionsListHtml = await readListPage('question', 1);
+  const questionsList = await analysisQuestionPage(questionsListHtml);
+  const promises = await questionsList.map(readDetail);
+  const results = await Promise.all(promises);
+  return results;
+}
+
+readPage()
   .then(console.info)
   .catch(console.error)
   .then(() => process.exit(1));
