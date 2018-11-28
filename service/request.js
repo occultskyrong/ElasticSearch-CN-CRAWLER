@@ -6,11 +6,11 @@ const request = require('request-promise');
 const { target: { host, url } } = require('../config');
 
 /**
- * 请求 - 分页 - 信息
+ * 请求 - 列表分页 - 信息
  * @param {string} module 模块
  * @param {number} page 分页页数
  */
-async function readPage(module, page) {
+async function readListPage(module, page) {
   if (!(module in url)) { throw new Error('未找到此模块'); }
   const urlParams = url[module]; // 目标url参数
   const requestUrl = `${host}${urlParams}${page}`; // 请求地址
@@ -18,6 +18,14 @@ async function readPage(module, page) {
   return response;
 }
 
+/**
+ * 请求 - 
+ * @param {string} href 请求地址
+ */
+async function readDetail(href){
+
+}
+
 module.exports = {
-  readPage,
+  readListPage,
 };
